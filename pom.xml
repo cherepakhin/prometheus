@@ -12,7 +12,7 @@
     <groupId>ru.perm.v</groupId>
     <artifactId>prometheus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>prometheus</name>
+    <name>prometheus-test</name>
     <description>Spting boot actuator and prometheus</description>
 
     <properties>
