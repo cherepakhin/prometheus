@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Страница</title>
+  <link th:href="@{/css/bootstrap-superhero.min.css}" rel="stylesheet"/>
+  <link th:href="@{/css/sticky-footer-navbar.css}" rel="stylesheet"/>
+  <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/popper.js/1.14.1/umd/popper.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="layout :: header"></div>
+<main class="container py-3">
+  <h1>Заголовок</h1>
+  <form th:action="@{/inc}" th:object="${dto}" method="post">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="idVar">Переменная</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="idVar" th:field="*{id}">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary my-2" value="Submit">Увеличить</button>
+  </form>
+  <h5 class="py-4">Результаты</h5>
+</main>
+<div th:replace="layout :: footer"></div>
+</body>
+</html>
