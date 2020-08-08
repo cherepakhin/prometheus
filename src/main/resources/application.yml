@@ -4,3 +4,9 @@ spring:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info, metrics, env
