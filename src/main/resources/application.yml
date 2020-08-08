@@ -6,10 +6,18 @@ spring:
     suffix: .html
 
 management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
   endpoints:
     web:
       exposure:
-        include: health,info, metrics, env
-  endpoint:
-    health:
-      show-details: always
+        include: "*"
