@@ -14,10 +14,10 @@ ok:abc
 [source, yaml]
 ----
 management:
-    endpoints:
-        web:
-            exposure:
-                include: "*"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 ----
 
 Для включения только Prometheus:
@@ -25,10 +25,10 @@ management:
 
 ----
 management:
-    endpoints:
-        web:
-            exposure:
-                include: prometheus
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
 ----
 
 Запрос prometheus для получения rps:
