@@ -1,8 +1,9 @@
 Endpoint для тестирования /echo/{msg}
 
+http://localhost:8080/echo/abc
+
 [source,http request]
 ----
-http://localhost:8080/echo/abc
 HTTP/1.1 200
 Keep-Alive: timeout=60
 

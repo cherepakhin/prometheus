@@ -1,19 +1,28 @@
 package ru.perm.v.prometheus.controller;
 
+import io.micrometer.core.instrument.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.perm.v.prometheus.dto.Dto;
 
 @Controller
-@RequestMapping("")
 public class TestCtrl {
     private static final Logger LOG = LoggerFactory.getLogger(TestCtrl.class);
+    private final Counter counterEcho;
     String namePage = "page";
+
+    public TestCtrl(@Autowired Counter counterEcho) {
+        this.counterEcho = counterEcho;
+    }
 
     @GetMapping("/")
     public String root(Model model) {
@@ -30,10 +39,11 @@ public class TestCtrl {
         return namePage;
     }
 
-    @GetMapping(value = {"/echo/{msg}"})
+    @GetMapping(value = {"/echo", "/echo/{msg}"})
     public ResponseEntity<String> echo(@PathVariable(name = "msg", required = false) String msg) {
         if (msg == null) {
             msg = "-";
+            counterEcho.increment();
         }
         return new ResponseEntity<>("ok:" + msg, HttpStatus.OK);
     }
