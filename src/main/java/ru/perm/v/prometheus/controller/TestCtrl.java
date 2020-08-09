@@ -2,12 +2,11 @@ package ru.perm.v.prometheus.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.perm.v.prometheus.dto.Dto;
 
 @Controller
@@ -17,7 +16,7 @@ public class TestCtrl {
     String namePage = "page";
 
     @GetMapping("/")
-    public String echo(Model model) {
+    public String root(Model model) {
         model.addAttribute(new Dto());
         return namePage;
     }
@@ -30,4 +29,13 @@ public class TestCtrl {
         model.addAttribute("dto", dto);
         return namePage;
     }
+
+    @GetMapping(value = {"/echo/{msg}"})
+    public ResponseEntity<String> echo(@PathVariable(name = "msg", required = false) String msg) {
+        if (msg == null) {
+            msg = "-";
+        }
+        return new ResponseEntity<>("ok:" + msg, HttpStatus.OK);
+    }
+
 }
