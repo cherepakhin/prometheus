@@ -1,8 +1,8 @@
 package ru.perm.v.prometheus.controller;
 
 import io.micrometer.core.instrument.Counter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import ru.perm.v.prometheus.dto.Dto;
 
 @Controller
 public class TestCtrl {
-    private static final Logger LOG = LoggerFactory.getLogger(TestCtrl.class);
+    private static final Logger LOG = Logger.getLogger(TestCtrl.class);
     private final Counter counterEcho;
     String namePage = "page";
 
@@ -33,7 +33,7 @@ public class TestCtrl {
     @PostMapping("/inc")
     public String inc(
             @ModelAttribute("dto") Dto dto, Model model) {
-        LOG.info("{}", dto);
+        LOG.info(dto.toString());
         dto.incId();
         model.addAttribute("dto", dto);
         return namePage;
@@ -45,6 +45,7 @@ public class TestCtrl {
             msg = "-";
             counterEcho.increment();
         }
+        LOG.info(msg);
         return new ResponseEntity<>("ok:" + msg, HttpStatus.OK);
     }
 
